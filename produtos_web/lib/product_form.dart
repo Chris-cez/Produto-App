@@ -33,6 +33,8 @@ class _ProductFormState extends State<ProductForm> {
       descricaoController.text = productProvider.productSelected!.descricao;
       precoController.text = productProvider.productSelected!.preco.toString();
       estoqueController.text = productProvider.productSelected!.estoque.toString();
+      data = productProvider.productSelected!.dataCriacao;
+      dataCadastroController.text = data != null ? "${data!.day}/${data!.month}/${data!.year}" : "";
 
       setState(() {
         this.title = 'Alterar';
@@ -109,13 +111,14 @@ class _ProductFormState extends State<ProductForm> {
                     }
                     return null;
                   },
+                  inInicial: data, // Adicione esta linha para preencher a data inicial
                 ),
                 TextButton(
                   onPressed: save,
-                  child: Text('Cadastrar'),
+                  child: Text('Salvar'),
                   style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Theme.of(context).primaryColor),
-                    foregroundColor: WidgetStatePropertyAll(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
                   ),
                 ),
               ],
